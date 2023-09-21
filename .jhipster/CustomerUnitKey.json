@@ -1,0 +1,48 @@
+{
+  "applications": ["customerContactApp"],
+  "changelogDate": "20230927201518",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "customer_unit_key",
+  "fields": [
+    {
+      "fieldName": "customerNumber",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "16"
+    },
+    {
+      "fieldName": "salesOrganization",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "16"
+    },
+    {
+      "fieldName": "distributionChannel",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "16"
+    },
+    {
+      "fieldName": "division",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "16"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "CustomerUnitKey",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "displayName",
+      "otherEntityName": "customerContact",
+      "otherEntityRelationshipName": "customerUnitKey",
+      "relationshipName": "customerContact",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "serviceClass"
+}

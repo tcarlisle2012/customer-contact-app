@@ -1,0 +1,61 @@
+{
+  "applications": ["customerContactApp"],
+  "changelogDate": "20230927201519",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "customer_contact",
+  "fields": [
+    {
+      "fieldName": "firstName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "minlength", "maxlength"],
+      "fieldValidateRulesMaxlength": "50",
+      "fieldValidateRulesMinlength": "1"
+    },
+    {
+      "fieldName": "lastName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "minlength", "maxlength"],
+      "fieldValidateRulesMaxlength": "50",
+      "fieldValidateRulesMinlength": "1"
+    },
+    {
+      "fieldName": "displayName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "minlength", "maxlength"],
+      "fieldValidateRulesMaxlength": "150",
+      "fieldValidateRulesMinlength": "1"
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "minlength", "maxlength", "pattern"],
+      "fieldValidateRulesMaxlength": "254",
+      "fieldValidateRulesMinlength": "5",
+      "fieldValidateRulesPattern": "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$"
+    },
+    {
+      "fieldName": "phoneNumber",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "minlength", "maxlength"],
+      "fieldValidateRulesMaxlength": "10",
+      "fieldValidateRulesMinlength": "10"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "CustomerContact",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "customerNumber",
+      "otherEntityName": "customerUnitKey",
+      "otherEntityRelationshipName": "customerContact",
+      "relationshipName": "customerUnitKey",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "service": "serviceClass"
+}

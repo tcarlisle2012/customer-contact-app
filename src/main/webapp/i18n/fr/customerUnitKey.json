@@ -1,0 +1,28 @@
+{
+  "customerContactApp": {
+    "customerUnitKey": {
+      "home": {
+        "title": "CustomerUnitKeys",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Customer Unit Key",
+        "createOrEditLabel": "Créer ou éditer un Customer Unit Key",
+        "notFound": "Aucun Customer Unit Key trouvé"
+      },
+      "created": "Un nouveau Customer Unit Key a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Customer Unit Key avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Customer Unit Key avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Customer Unit Key {{ id }} ?"
+      },
+      "detail": {
+        "title": "Customer Unit Key"
+      },
+      "id": "ID",
+      "customerNumber": "Customer Number",
+      "salesOrganization": "Sales Organization",
+      "distributionChannel": "Distribution Channel",
+      "division": "Division",
+      "customerContact": "Customer Contact"
+    }
+  }
+}

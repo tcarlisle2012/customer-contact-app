@@ -1,0 +1,77 @@
+/**
+* This is where the magic begins, and the central nervous system of a jhipster app. From this file,
+* the entire app is generated, front to back. This file is the blueprint for the app. When we add/modify entities,
+* relationships, etc. we edit this file, and then:
+*           jhipster import-jdl customerContactApp.jdl
+* Usually, one tries to get the entities, relationships, and such to be solidified before trying to modify and add
+* custom business logic to the app. And when it does come time to add the business logic, one must do so in a way that
+* makes it possible and somewhat painless to regenerate the app.
+**/
+application {
+  config {
+    applicationType monolith
+    authenticationType jwt
+    baseName customerContactApp
+    blueprints []
+    buildTool gradle
+    cacheProvider no
+    clientFramework angularX
+    clientPackageManager npm
+    clientTheme united
+    clientThemeVariant primary
+    creationTimestamp 1695153382504
+    databaseType sql
+    devDatabaseType postgresql
+    dtoSuffix DTO
+    enableGradleEnterprise false
+    enableHibernateCache false
+    enableSwaggerCodegen false
+    enableTranslation true
+    gradleEnterpriseHost ""
+    jhiPrefix jhi
+    jhipsterVersion "7.9.4"
+    jwtSecretKey "MGJmYTY3ZjlkZTE4NzJmYzkyMmYyNDZiOTI2NmI3NDAzODRlZTEzNjI3OTUzYjc5ZjQ3Yjg1ZTU2ZGYzZWVjYWNmZjg5NmIyOTU1ZDBkNGZmYWY3N2RhNTI3YTZhYjI0YjQ4NjE2MWZiNWEwMzM1MGI3NzUxMzNhOTc4YzAwZmM="
+    languages [en, fr]
+    messageBroker false
+    microfrontend false
+    microfrontends []
+    nativeLanguage en
+    otherModules []
+    packageName com.gfs.gordonnow
+    prodDatabaseType postgresql
+    reactive true
+    searchEngine false
+    serverPort 8080
+    serviceDiscoveryType no
+    skipClient false
+    skipUserManagement false
+    testFrameworks []
+    websocket false
+    withAdminUi true
+  }
+
+  entities CustomerUnitKey, CustomerContact
+}
+
+entity CustomerUnitKey {
+  customerNumber String required maxlength(16)
+  salesOrganization String required maxlength(16)
+  distributionChannel String required maxlength(16)
+  division String required maxlength(16)
+}
+
+entity CustomerContact {
+  firstName String required minlength(1) maxlength(50)
+  lastName String required minlength(1) maxlength(50)
+  displayName String required minlength(1) maxlength(150)
+  email String required minlength(5) maxlength(254) pattern(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)
+  phoneNumber String required minlength(10) maxlength(10)
+}
+
+relationship OneToMany {
+  CustomerUnitKey{customerContact(displayName)} to CustomerContact{customerUnitKey(customerNumber) required}
+}
+
+dto CustomerUnitKey, CustomerContact with mapstruct
+paginate CustomerUnitKey, CustomerContact with pagination
+service CustomerUnitKey, CustomerContact with serviceClass

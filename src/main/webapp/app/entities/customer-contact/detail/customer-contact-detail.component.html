@@ -1,0 +1,58 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="customerContact">
+      <h2 data-cy="customerContactDetailsHeading">
+        <span jhiTranslate="customerContactApp.customerContact.detail.title">Customer Contact</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ customerContact.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="customerContactApp.customerContact.firstName">First Name</span></dt>
+        <dd>
+          <span>{{ customerContact.firstName }}</span>
+        </dd>
+        <dt><span jhiTranslate="customerContactApp.customerContact.lastName">Last Name</span></dt>
+        <dd>
+          <span>{{ customerContact.lastName }}</span>
+        </dd>
+        <dt><span jhiTranslate="customerContactApp.customerContact.displayName">Display Name</span></dt>
+        <dd>
+          <span>{{ customerContact.displayName }}</span>
+        </dd>
+        <dt><span jhiTranslate="customerContactApp.customerContact.email">Email</span></dt>
+        <dd>
+          <span>{{ customerContact.email }}</span>
+        </dd>
+        <dt><span jhiTranslate="customerContactApp.customerContact.phoneNumber">Phone Number</span></dt>
+        <dd>
+          <span>{{ customerContact.phoneNumber }}</span>
+        </dd>
+        <dt><span jhiTranslate="customerContactApp.customerContact.customerUnitKey">Customer Unit Key</span></dt>
+        <dd>
+          <div *ngIf="customerContact.customerUnitKey">
+            <a [routerLink]="['/customer-unit-key', customerContact.customerUnitKey.id, 'view']">{{
+              customerContact.customerUnitKey.customerNumber
+            }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/customer-contact', customerContact.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,46 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="customerUnitKey">
+      <h2 data-cy="customerUnitKeyDetailsHeading">
+        <span jhiTranslate="customerContactApp.customerUnitKey.detail.title">Customer Unit Key</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ customerUnitKey.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="customerContactApp.customerUnitKey.customerNumber">Customer Number</span></dt>
+        <dd>
+          <span>{{ customerUnitKey.customerNumber }}</span>
+        </dd>
+        <dt><span jhiTranslate="customerContactApp.customerUnitKey.salesOrganization">Sales Organization</span></dt>
+        <dd>
+          <span>{{ customerUnitKey.salesOrganization }}</span>
+        </dd>
+        <dt><span jhiTranslate="customerContactApp.customerUnitKey.distributionChannel">Distribution Channel</span></dt>
+        <dd>
+          <span>{{ customerUnitKey.distributionChannel }}</span>
+        </dd>
+        <dt><span jhiTranslate="customerContactApp.customerUnitKey.division">Division</span></dt>
+        <dd>
+          <span>{{ customerUnitKey.division }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/customer-unit-key', customerUnitKey.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

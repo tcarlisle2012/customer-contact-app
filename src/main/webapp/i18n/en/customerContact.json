@@ -1,0 +1,29 @@
+{
+  "customerContactApp": {
+    "customerContact": {
+      "home": {
+        "title": "Customer Contacts",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Customer Contact",
+        "createOrEditLabel": "Create or edit a Customer Contact",
+        "notFound": "No Customer Contacts found"
+      },
+      "created": "A new Customer Contact is created with identifier {{ param }}",
+      "updated": "A Customer Contact is updated with identifier {{ param }}",
+      "deleted": "A Customer Contact is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Customer Contact {{ id }}?"
+      },
+      "detail": {
+        "title": "Customer Contact"
+      },
+      "id": "ID",
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "displayName": "Display Name",
+      "email": "Email",
+      "phoneNumber": "Phone Number",
+      "customerUnitKey": "Customer Unit Key"
+    }
+  }
+}

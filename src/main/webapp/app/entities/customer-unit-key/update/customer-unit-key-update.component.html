@@ -1,0 +1,167 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-customer-unit-key-heading"
+        data-cy="CustomerUnitKeyCreateUpdateHeading"
+        jhiTranslate="customerContactApp.customerUnitKey.home.createOrEditLabel"
+      >
+        Create or edit a Customer Unit Key
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="customerContactApp.customerUnitKey.customerNumber" for="field_customerNumber"
+            >Customer Number</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="customerNumber"
+            id="field_customerNumber"
+            data-cy="customerNumber"
+            formControlName="customerNumber"
+          />
+          <div
+            *ngIf="
+              editForm.get('customerNumber')!.invalid && (editForm.get('customerNumber')!.dirty || editForm.get('customerNumber')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('customerNumber')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('customerNumber')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 16 }"
+            >
+              This field cannot be longer than 16 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="customerContactApp.customerUnitKey.salesOrganization" for="field_salesOrganization"
+            >Sales Organization</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="salesOrganization"
+            id="field_salesOrganization"
+            data-cy="salesOrganization"
+            formControlName="salesOrganization"
+          />
+          <div
+            *ngIf="
+              editForm.get('salesOrganization')!.invalid &&
+              (editForm.get('salesOrganization')!.dirty || editForm.get('salesOrganization')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('salesOrganization')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('salesOrganization')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 16 }"
+            >
+              This field cannot be longer than 16 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="customerContactApp.customerUnitKey.distributionChannel" for="field_distributionChannel"
+            >Distribution Channel</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="distributionChannel"
+            id="field_distributionChannel"
+            data-cy="distributionChannel"
+            formControlName="distributionChannel"
+          />
+          <div
+            *ngIf="
+              editForm.get('distributionChannel')!.invalid &&
+              (editForm.get('distributionChannel')!.dirty || editForm.get('distributionChannel')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('distributionChannel')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('distributionChannel')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 16 }"
+            >
+              This field cannot be longer than 16 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="customerContactApp.customerUnitKey.division" for="field_division">Division</label>
+          <input type="text" class="form-control" name="division" id="field_division" data-cy="division" formControlName="division" />
+          <div *ngIf="editForm.get('division')!.invalid && (editForm.get('division')!.dirty || editForm.get('division')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('division')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('division')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 16 }"
+            >
+              This field cannot be longer than 16 characters.
+            </small>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
