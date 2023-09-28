@@ -23,7 +23,7 @@ logging:
 spring:
   devtools:
     restart:
-      enabled: true
+      enabled: false # because devtools likes  to restart the backend when a file changes
       additional-exclude: static/**
     livereload:
       enabled: false # we use Webpack dev server + BrowserSync for livereload
