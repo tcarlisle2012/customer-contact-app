@@ -44,6 +44,12 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
+          <th scope="col" jhiSortBy="middleName">
+            <div class="d-flex">
+              <span jhiTranslate="customerContactApp.customerContact.middleName">Middle Name</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
           <th scope="col" jhiSortBy="lastName">
             <div class="d-flex">
               <span jhiTranslate="customerContactApp.customerContact.lastName">Last Name</span>
@@ -62,9 +68,21 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="phoneNumber">
+          <th scope="col" jhiSortBy="phone">
             <div class="d-flex">
-              <span jhiTranslate="customerContactApp.customerContact.phoneNumber">Phone Number</span>
+              <span jhiTranslate="customerContactApp.customerContact.phone">Phone</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="department">
+            <div class="d-flex">
+              <span jhiTranslate="customerContactApp.customerContact.department">Department</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="jobTitle">
+            <div class="d-flex">
+              <span jhiTranslate="customerContactApp.customerContact.jobTitle">Job Title</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
@@ -83,10 +101,13 @@
             <a [routerLink]="['/customer-contact', customerContact.id, 'view']">{{ customerContact.id }}</a>
           </td>
           <td>{{ customerContact.firstName }}</td>
+          <td>{{ customerContact.middleName }}</td>
           <td>{{ customerContact.lastName }}</td>
           <td>{{ customerContact.displayName }}</td>
           <td>{{ customerContact.email }}</td>
-          <td>{{ customerContact.phoneNumber }}</td>
+          <td>{{ customerContact.phone }}</td>
+          <td>{{ customerContact.department }}</td>
+          <td>{{ customerContact.jobTitle }}</td>
           <td>
             <div *ngIf="customerContact.customerUnitKey">
               <a [routerLink]="['/customer-unit-key', customerContact.customerUnitKey.id, 'view']">{{

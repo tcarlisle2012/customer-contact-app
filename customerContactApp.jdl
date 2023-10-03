@@ -62,10 +62,13 @@ entity CustomerUnitKey {
 
 entity CustomerContact {
   firstName String required minlength(1) maxlength(50)
+  middleName String required minlength(1) maxlength(50)
   lastName String required minlength(1) maxlength(50)
   displayName String required minlength(1) maxlength(150)
   email String required minlength(5) maxlength(254) pattern(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)
-  phoneNumber String required minlength(10) maxlength(10)
+  phone String required minlength(10) maxlength(10)
+  department String required minlength(2) maxlength(120)
+  jobTitle String required minlength(2) maxlength(120)
 }
 
 relationship OneToMany {

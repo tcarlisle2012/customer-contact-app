@@ -19,10 +19,13 @@
       },
       "id": "ID",
       "firstName": "First Name",
+      "middleName": "Middle Name",
       "lastName": "Last Name",
       "displayName": "Display Name",
       "email": "Email",
-      "phoneNumber": "Phone Number",
+      "phone": "Phone",
+      "department": "Department",
+      "jobTitle": "Job Title",
       "customerUnitKey": "Customer Unit Key"
     }
   }

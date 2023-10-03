@@ -46,6 +46,9 @@ class CustomerContactResourceIT {
     private static final String DEFAULT_FIRST_NAME = "AAAAAAAAAA";
     private static final String UPDATED_FIRST_NAME = "BBBBBBBBBB";
 
+    private static final String DEFAULT_MIDDLE_NAME = "AAAAAAAAAA";
+    private static final String UPDATED_MIDDLE_NAME = "BBBBBBBBBB";
+
     private static final String DEFAULT_LAST_NAME = "AAAAAAAAAA";
     private static final String UPDATED_LAST_NAME = "BBBBBBBBBB";
 
@@ -55,8 +58,14 @@ class CustomerContactResourceIT {
     private static final String DEFAULT_EMAIL = "5-f0l@6F0.FG";
     private static final String UPDATED_EMAIL = "u02@cVMn-l.DA.7Jycq.7k.cyP0";
 
-    private static final String DEFAULT_PHONE_NUMBER = "AAAAAAAAAA";
-    private static final String UPDATED_PHONE_NUMBER = "BBBBBBBBBB";
+    private static final String DEFAULT_PHONE = "AAAAAAAAAA";
+    private static final String UPDATED_PHONE = "BBBBBBBBBB";
+
+    private static final String DEFAULT_DEPARTMENT = "AAAAAAAAAA";
+    private static final String UPDATED_DEPARTMENT = "BBBBBBBBBB";
+
+    private static final String DEFAULT_JOB_TITLE = "AAAAAAAAAA";
+    private static final String UPDATED_JOB_TITLE = "BBBBBBBBBB";
 
     private static final String ENTITY_API_URL = "/api/customer-contacts";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
@@ -93,10 +102,13 @@ class CustomerContactResourceIT {
     public static CustomerContact createEntity(EntityManager em) {
         CustomerContact customerContact = new CustomerContact()
             .firstName(DEFAULT_FIRST_NAME)
+            .middleName(DEFAULT_MIDDLE_NAME)
             .lastName(DEFAULT_LAST_NAME)
             .displayName(DEFAULT_DISPLAY_NAME)
             .email(DEFAULT_EMAIL)
-            .phoneNumber(DEFAULT_PHONE_NUMBER);
+            .phone(DEFAULT_PHONE)
+            .department(DEFAULT_DEPARTMENT)
+            .jobTitle(DEFAULT_JOB_TITLE);
         // Add required entity
         CustomerUnitKey customerUnitKey;
         customerUnitKey = em.insert(CustomerUnitKeyResourceIT.createEntity(em)).block();
@@ -113,10 +125,13 @@ class CustomerContactResourceIT {
     public static CustomerContact createUpdatedEntity(EntityManager em) {
         CustomerContact customerContact = new CustomerContact()
             .firstName(UPDATED_FIRST_NAME)
+            .middleName(UPDATED_MIDDLE_NAME)
             .lastName(UPDATED_LAST_NAME)
             .displayName(UPDATED_DISPLAY_NAME)
             .email(UPDATED_EMAIL)
-            .phoneNumber(UPDATED_PHONE_NUMBER);
+            .phone(UPDATED_PHONE)
+            .department(UPDATED_DEPARTMENT)
+            .jobTitle(UPDATED_JOB_TITLE);
         // Add required entity
         CustomerUnitKey customerUnitKey;
         customerUnitKey = em.insert(CustomerUnitKeyResourceIT.createUpdatedEntity(em)).block();
@@ -163,10 +178,13 @@ class CustomerContactResourceIT {
         assertThat(customerContactList).hasSize(databaseSizeBeforeCreate + 1);
         CustomerContact testCustomerContact = customerContactList.get(customerContactList.size() - 1);
         assertThat(testCustomerContact.getFirstName()).isEqualTo(DEFAULT_FIRST_NAME);
+        assertThat(testCustomerContact.getMiddleName()).isEqualTo(DEFAULT_MIDDLE_NAME);
         assertThat(testCustomerContact.getLastName()).isEqualTo(DEFAULT_LAST_NAME);
         assertThat(testCustomerContact.getDisplayName()).isEqualTo(DEFAULT_DISPLAY_NAME);
         assertThat(testCustomerContact.getEmail()).isEqualTo(DEFAULT_EMAIL);
-        assertThat(testCustomerContact.getPhoneNumber()).isEqualTo(DEFAULT_PHONE_NUMBER);
+        assertThat(testCustomerContact.getPhone()).isEqualTo(DEFAULT_PHONE);
+        assertThat(testCustomerContact.getDepartment()).isEqualTo(DEFAULT_DEPARTMENT);
+        assertThat(testCustomerContact.getJobTitle()).isEqualTo(DEFAULT_JOB_TITLE);
     }
 
     @Test
@@ -197,6 +215,28 @@ class CustomerContactResourceIT {
         int databaseSizeBeforeTest = customerContactRepository.findAll().collectList().block().size();
         // set the field null
         customerContact.setFirstName(null);
+
+        // Create the CustomerContact, which fails.
+        CustomerContactDTO customerContactDTO = customerContactMapper.toDto(customerContact);
+
+        webTestClient
+            .post()
+            .uri(ENTITY_API_URL)
+            .contentType(MediaType.APPLICATION_JSON)
+            .bodyValue(TestUtil.convertObjectToJsonBytes(customerContactDTO))
+            .exchange()
+            .expectStatus()
+            .isBadRequest();
+
+        List<CustomerContact> customerContactList = customerContactRepository.findAll().collectList().block();
+        assertThat(customerContactList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    void checkMiddleNameIsRequired() throws Exception {
+        int databaseSizeBeforeTest = customerContactRepository.findAll().collectList().block().size();
+        // set the field null
+        customerContact.setMiddleName(null);
 
         // Create the CustomerContact, which fails.
         CustomerContactDTO customerContactDTO = customerContactMapper.toDto(customerContact);
@@ -281,10 +321,54 @@ class CustomerContactResourceIT {
     }
 
     @Test
-    void checkPhoneNumberIsRequired() throws Exception {
+    void checkPhoneIsRequired() throws Exception {
         int databaseSizeBeforeTest = customerContactRepository.findAll().collectList().block().size();
         // set the field null
-        customerContact.setPhoneNumber(null);
+        customerContact.setPhone(null);
+
+        // Create the CustomerContact, which fails.
+        CustomerContactDTO customerContactDTO = customerContactMapper.toDto(customerContact);
+
+        webTestClient
+            .post()
+            .uri(ENTITY_API_URL)
+            .contentType(MediaType.APPLICATION_JSON)
+            .bodyValue(TestUtil.convertObjectToJsonBytes(customerContactDTO))
+            .exchange()
+            .expectStatus()
+            .isBadRequest();
+
+        List<CustomerContact> customerContactList = customerContactRepository.findAll().collectList().block();
+        assertThat(customerContactList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    void checkDepartmentIsRequired() throws Exception {
+        int databaseSizeBeforeTest = customerContactRepository.findAll().collectList().block().size();
+        // set the field null
+        customerContact.setDepartment(null);
+
+        // Create the CustomerContact, which fails.
+        CustomerContactDTO customerContactDTO = customerContactMapper.toDto(customerContact);
+
+        webTestClient
+            .post()
+            .uri(ENTITY_API_URL)
+            .contentType(MediaType.APPLICATION_JSON)
+            .bodyValue(TestUtil.convertObjectToJsonBytes(customerContactDTO))
+            .exchange()
+            .expectStatus()
+            .isBadRequest();
+
+        List<CustomerContact> customerContactList = customerContactRepository.findAll().collectList().block();
+        assertThat(customerContactList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    void checkJobTitleIsRequired() throws Exception {
+        int databaseSizeBeforeTest = customerContactRepository.findAll().collectList().block().size();
+        // set the field null
+        customerContact.setJobTitle(null);
 
         // Create the CustomerContact, which fails.
         CustomerContactDTO customerContactDTO = customerContactMapper.toDto(customerContact);
@@ -322,14 +406,20 @@ class CustomerContactResourceIT {
             .value(hasItem(customerContact.getId().intValue()))
             .jsonPath("$.[*].firstName")
             .value(hasItem(DEFAULT_FIRST_NAME))
+            .jsonPath("$.[*].middleName")
+            .value(hasItem(DEFAULT_MIDDLE_NAME))
             .jsonPath("$.[*].lastName")
             .value(hasItem(DEFAULT_LAST_NAME))
             .jsonPath("$.[*].displayName")
             .value(hasItem(DEFAULT_DISPLAY_NAME))
             .jsonPath("$.[*].email")
             .value(hasItem(DEFAULT_EMAIL))
-            .jsonPath("$.[*].phoneNumber")
-            .value(hasItem(DEFAULT_PHONE_NUMBER));
+            .jsonPath("$.[*].phone")
+            .value(hasItem(DEFAULT_PHONE))
+            .jsonPath("$.[*].department")
+            .value(hasItem(DEFAULT_DEPARTMENT))
+            .jsonPath("$.[*].jobTitle")
+            .value(hasItem(DEFAULT_JOB_TITLE));
     }
 
     @SuppressWarnings({ "unchecked" })
@@ -369,14 +459,20 @@ class CustomerContactResourceIT {
             .value(is(customerContact.getId().intValue()))
             .jsonPath("$.firstName")
             .value(is(DEFAULT_FIRST_NAME))
+            .jsonPath("$.middleName")
+            .value(is(DEFAULT_MIDDLE_NAME))
             .jsonPath("$.lastName")
             .value(is(DEFAULT_LAST_NAME))
             .jsonPath("$.displayName")
             .value(is(DEFAULT_DISPLAY_NAME))
             .jsonPath("$.email")
             .value(is(DEFAULT_EMAIL))
-            .jsonPath("$.phoneNumber")
-            .value(is(DEFAULT_PHONE_NUMBER));
+            .jsonPath("$.phone")
+            .value(is(DEFAULT_PHONE))
+            .jsonPath("$.department")
+            .value(is(DEFAULT_DEPARTMENT))
+            .jsonPath("$.jobTitle")
+            .value(is(DEFAULT_JOB_TITLE));
     }
 
     @Test
@@ -402,10 +498,13 @@ class CustomerContactResourceIT {
         CustomerContact updatedCustomerContact = customerContactRepository.findById(customerContact.getId()).block();
         updatedCustomerContact
             .firstName(UPDATED_FIRST_NAME)
+            .middleName(UPDATED_MIDDLE_NAME)
             .lastName(UPDATED_LAST_NAME)
             .displayName(UPDATED_DISPLAY_NAME)
             .email(UPDATED_EMAIL)
-            .phoneNumber(UPDATED_PHONE_NUMBER);
+            .phone(UPDATED_PHONE)
+            .department(UPDATED_DEPARTMENT)
+            .jobTitle(UPDATED_JOB_TITLE);
         CustomerContactDTO customerContactDTO = customerContactMapper.toDto(updatedCustomerContact);
 
         webTestClient
@@ -422,10 +521,13 @@ class CustomerContactResourceIT {
         assertThat(customerContactList).hasSize(databaseSizeBeforeUpdate);
         CustomerContact testCustomerContact = customerContactList.get(customerContactList.size() - 1);
         assertThat(testCustomerContact.getFirstName()).isEqualTo(UPDATED_FIRST_NAME);
+        assertThat(testCustomerContact.getMiddleName()).isEqualTo(UPDATED_MIDDLE_NAME);
         assertThat(testCustomerContact.getLastName()).isEqualTo(UPDATED_LAST_NAME);
         assertThat(testCustomerContact.getDisplayName()).isEqualTo(UPDATED_DISPLAY_NAME);
         assertThat(testCustomerContact.getEmail()).isEqualTo(UPDATED_EMAIL);
-        assertThat(testCustomerContact.getPhoneNumber()).isEqualTo(UPDATED_PHONE_NUMBER);
+        assertThat(testCustomerContact.getPhone()).isEqualTo(UPDATED_PHONE);
+        assertThat(testCustomerContact.getDepartment()).isEqualTo(UPDATED_DEPARTMENT);
+        assertThat(testCustomerContact.getJobTitle()).isEqualTo(UPDATED_JOB_TITLE);
     }
 
     @Test
@@ -508,7 +610,7 @@ class CustomerContactResourceIT {
         CustomerContact partialUpdatedCustomerContact = new CustomerContact();
         partialUpdatedCustomerContact.setId(customerContact.getId());
 
-        partialUpdatedCustomerContact.email(UPDATED_EMAIL);
+        partialUpdatedCustomerContact.displayName(UPDATED_DISPLAY_NAME).department(UPDATED_DEPARTMENT);
 
         webTestClient
             .patch()
@@ -524,10 +626,13 @@ class CustomerContactResourceIT {
         assertThat(customerContactList).hasSize(databaseSizeBeforeUpdate);
         CustomerContact testCustomerContact = customerContactList.get(customerContactList.size() - 1);
         assertThat(testCustomerContact.getFirstName()).isEqualTo(DEFAULT_FIRST_NAME);
+        assertThat(testCustomerContact.getMiddleName()).isEqualTo(DEFAULT_MIDDLE_NAME);
         assertThat(testCustomerContact.getLastName()).isEqualTo(DEFAULT_LAST_NAME);
-        assertThat(testCustomerContact.getDisplayName()).isEqualTo(DEFAULT_DISPLAY_NAME);
-        assertThat(testCustomerContact.getEmail()).isEqualTo(UPDATED_EMAIL);
-        assertThat(testCustomerContact.getPhoneNumber()).isEqualTo(DEFAULT_PHONE_NUMBER);
+        assertThat(testCustomerContact.getDisplayName()).isEqualTo(UPDATED_DISPLAY_NAME);
+        assertThat(testCustomerContact.getEmail()).isEqualTo(DEFAULT_EMAIL);
+        assertThat(testCustomerContact.getPhone()).isEqualTo(DEFAULT_PHONE);
+        assertThat(testCustomerContact.getDepartment()).isEqualTo(UPDATED_DEPARTMENT);
+        assertThat(testCustomerContact.getJobTitle()).isEqualTo(DEFAULT_JOB_TITLE);
     }
 
     @Test
@@ -543,10 +648,13 @@ class CustomerContactResourceIT {
 
         partialUpdatedCustomerContact
             .firstName(UPDATED_FIRST_NAME)
+            .middleName(UPDATED_MIDDLE_NAME)
             .lastName(UPDATED_LAST_NAME)
             .displayName(UPDATED_DISPLAY_NAME)
             .email(UPDATED_EMAIL)
-            .phoneNumber(UPDATED_PHONE_NUMBER);
+            .phone(UPDATED_PHONE)
+            .department(UPDATED_DEPARTMENT)
+            .jobTitle(UPDATED_JOB_TITLE);
 
         webTestClient
             .patch()
@@ -562,10 +670,13 @@ class CustomerContactResourceIT {
         assertThat(customerContactList).hasSize(databaseSizeBeforeUpdate);
         CustomerContact testCustomerContact = customerContactList.get(customerContactList.size() - 1);
         assertThat(testCustomerContact.getFirstName()).isEqualTo(UPDATED_FIRST_NAME);
+        assertThat(testCustomerContact.getMiddleName()).isEqualTo(UPDATED_MIDDLE_NAME);
         assertThat(testCustomerContact.getLastName()).isEqualTo(UPDATED_LAST_NAME);
         assertThat(testCustomerContact.getDisplayName()).isEqualTo(UPDATED_DISPLAY_NAME);
         assertThat(testCustomerContact.getEmail()).isEqualTo(UPDATED_EMAIL);
-        assertThat(testCustomerContact.getPhoneNumber()).isEqualTo(UPDATED_PHONE_NUMBER);
+        assertThat(testCustomerContact.getPhone()).isEqualTo(UPDATED_PHONE);
+        assertThat(testCustomerContact.getDepartment()).isEqualTo(UPDATED_DEPARTMENT);
+        assertThat(testCustomerContact.getJobTitle()).isEqualTo(UPDATED_JOB_TITLE);
     }
 
     @Test

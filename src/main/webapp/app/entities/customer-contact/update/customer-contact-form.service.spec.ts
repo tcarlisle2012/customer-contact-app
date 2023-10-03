@@ -21,10 +21,13 @@ describe('CustomerContact Form Service', () => {
           expect.objectContaining({
             id: expect.any(Object),
             firstName: expect.any(Object),
+            middleName: expect.any(Object),
             lastName: expect.any(Object),
             displayName: expect.any(Object),
             email: expect.any(Object),
-            phoneNumber: expect.any(Object),
+            phone: expect.any(Object),
+            department: expect.any(Object),
+            jobTitle: expect.any(Object),
             customerUnitKey: expect.any(Object),
           })
         );
@@ -37,10 +40,13 @@ describe('CustomerContact Form Service', () => {
           expect.objectContaining({
             id: expect.any(Object),
             firstName: expect.any(Object),
+            middleName: expect.any(Object),
             lastName: expect.any(Object),
             displayName: expect.any(Object),
             email: expect.any(Object),
-            phoneNumber: expect.any(Object),
+            phone: expect.any(Object),
+            department: expect.any(Object),
+            jobTitle: expect.any(Object),
             customerUnitKey: expect.any(Object),
           })
         );

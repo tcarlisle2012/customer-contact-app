@@ -3,10 +3,13 @@ import { ICustomerUnitKey } from 'app/entities/customer-unit-key/customer-unit-k
 export interface ICustomerContact {
   id: number;
   firstName?: string | null;
+  middleName?: string | null;
   lastName?: string | null;
   displayName?: string | null;
   email?: string | null;
-  phoneNumber?: string | null;
+  phone?: string | null;
+  department?: string | null;
+  jobTitle?: string | null;
   customerUnitKey?: Pick<ICustomerUnitKey, 'id' | 'customerNumber'> | null;
 }
 

@@ -50,45 +50,6 @@ Add the `help` flag on any command to see how you can use it. For example, `npm 
 
 The `npm run` command will list all of the scripts available to run for this project.
 
-### Running Locally & Development
-
-#### In your local postgres
-
-Create a database called 'customerContactApp'
-
-#### Create a spring resource file
-
-Creat file /src/main/resources/application-local.yml with the following content:
-
-```
-spring:
-  r2dbc:
-    password: {the password to your local postgres}
-    username: {the username for your local postgres}
-```
-
-Note: application-local.yml is git "ignored"
-
-#### Edit or create a run configuration
-
-Configure a run configuration in your IDE with the Spring Profiles Active set to: dev,local
-
-#### Run the Backend
-
-By launching the run configuration you created.
-
-#### Run the Frontend
-
-```
-npm run start
-```
-
-#### Note, the 'admin' and 'user' account passwords have been changed from the defaults for security reasons.
-
-User can hack /app/src/main/resources/config/liquibase/users.csv to change the passwords.
-
-The current passwords are something people looking at this repo should be able to guess. It's the same as is the password for an account with a username that might or might not rhyme with "Best Rod".
-
 ### PWA Support
 
 JHipster ships with PWA (Progressive Web App) support, and it's turned off by default. One of the main components of a PWA is a service worker.

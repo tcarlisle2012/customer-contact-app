@@ -26,10 +26,13 @@ public class CustomerContactRowMapper implements BiFunction<Row, String, Custome
         CustomerContact entity = new CustomerContact();
         entity.setId(converter.fromRow(row, prefix + "_id", Long.class));
         entity.setFirstName(converter.fromRow(row, prefix + "_first_name", String.class));
+        entity.setMiddleName(converter.fromRow(row, prefix + "_middle_name", String.class));
         entity.setLastName(converter.fromRow(row, prefix + "_last_name", String.class));
         entity.setDisplayName(converter.fromRow(row, prefix + "_display_name", String.class));
         entity.setEmail(converter.fromRow(row, prefix + "_email", String.class));
-        entity.setPhoneNumber(converter.fromRow(row, prefix + "_phone_number", String.class));
+        entity.setPhone(converter.fromRow(row, prefix + "_phone", String.class));
+        entity.setDepartment(converter.fromRow(row, prefix + "_department", String.class));
+        entity.setJobTitle(converter.fromRow(row, prefix + "_job_title", String.class));
         entity.setCustomerUnitKeyId(converter.fromRow(row, prefix + "_customer_unit_key_id", Long.class));
         return entity;
     }

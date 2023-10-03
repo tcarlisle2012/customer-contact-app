@@ -19,10 +19,13 @@ type CustomerContactFormDefaults = Pick<NewCustomerContact, 'id'>;
 type CustomerContactFormGroupContent = {
   id: FormControl<ICustomerContact['id'] | NewCustomerContact['id']>;
   firstName: FormControl<ICustomerContact['firstName']>;
+  middleName: FormControl<ICustomerContact['middleName']>;
   lastName: FormControl<ICustomerContact['lastName']>;
   displayName: FormControl<ICustomerContact['displayName']>;
   email: FormControl<ICustomerContact['email']>;
-  phoneNumber: FormControl<ICustomerContact['phoneNumber']>;
+  phone: FormControl<ICustomerContact['phone']>;
+  department: FormControl<ICustomerContact['department']>;
+  jobTitle: FormControl<ICustomerContact['jobTitle']>;
   customerUnitKey: FormControl<ICustomerContact['customerUnitKey']>;
 };
 
@@ -46,6 +49,9 @@ export class CustomerContactFormService {
       firstName: new FormControl(customerContactRawValue.firstName, {
         validators: [Validators.required, Validators.minLength(1), Validators.maxLength(50)],
       }),
+      middleName: new FormControl(customerContactRawValue.middleName, {
+        validators: [Validators.required, Validators.minLength(1), Validators.maxLength(50)],
+      }),
       lastName: new FormControl(customerContactRawValue.lastName, {
         validators: [Validators.required, Validators.minLength(1), Validators.maxLength(50)],
       }),
@@ -60,8 +66,14 @@ export class CustomerContactFormService {
           Validators.pattern('^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$'),
         ],
       }),
-      phoneNumber: new FormControl(customerContactRawValue.phoneNumber, {
+      phone: new FormControl(customerContactRawValue.phone, {
         validators: [Validators.required, Validators.minLength(10), Validators.maxLength(10)],
+      }),
+      department: new FormControl(customerContactRawValue.department, {
+        validators: [Validators.required, Validators.minLength(2), Validators.maxLength(120)],
+      }),
+      jobTitle: new FormControl(customerContactRawValue.jobTitle, {
+        validators: [Validators.required, Validators.minLength(2), Validators.maxLength(120)],
       }),
       customerUnitKey: new FormControl(customerContactRawValue.customerUnitKey, {
         validators: [Validators.required],

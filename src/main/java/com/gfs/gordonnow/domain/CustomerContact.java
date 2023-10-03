@@ -28,6 +28,11 @@ public class CustomerContact implements Serializable {
 
     @NotNull(message = "must not be null")
     @Size(min = 1, max = 50)
+    @Column("middle_name")
+    private String middleName;
+
+    @NotNull(message = "must not be null")
+    @Size(min = 1, max = 50)
     @Column("last_name")
     private String lastName;
 
@@ -44,8 +49,18 @@ public class CustomerContact implements Serializable {
 
     @NotNull(message = "must not be null")
     @Size(min = 10, max = 10)
-    @Column("phone_number")
-    private String phoneNumber;
+    @Column("phone")
+    private String phone;
+
+    @NotNull(message = "must not be null")
+    @Size(min = 2, max = 120)
+    @Column("department")
+    private String department;
+
+    @NotNull(message = "must not be null")
+    @Size(min = 2, max = 120)
+    @Column("job_title")
+    private String jobTitle;
 
     @Transient
     @JsonIgnoreProperties(value = { "customerContacts" }, allowSetters = true)
@@ -80,6 +95,19 @@ public class CustomerContact implements Serializable {
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
+    }
+
+    public String getMiddleName() {
+        return this.middleName;
+    }
+
+    public CustomerContact middleName(String middleName) {
+        this.setMiddleName(middleName);
+        return this;
+    }
+
+    public void setMiddleName(String middleName) {
+        this.middleName = middleName;
     }
 
     public String getLastName() {
@@ -121,17 +149,43 @@ public class CustomerContact implements Serializable {
         this.email = email;
     }
 
-    public String getPhoneNumber() {
-        return this.phoneNumber;
+    public String getPhone() {
+        return this.phone;
     }
 
-    public CustomerContact phoneNumber(String phoneNumber) {
-        this.setPhoneNumber(phoneNumber);
+    public CustomerContact phone(String phone) {
+        this.setPhone(phone);
         return this;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getDepartment() {
+        return this.department;
+    }
+
+    public CustomerContact department(String department) {
+        this.setDepartment(department);
+        return this;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
+    }
+
+    public String getJobTitle() {
+        return this.jobTitle;
+    }
+
+    public CustomerContact jobTitle(String jobTitle) {
+        this.setJobTitle(jobTitle);
+        return this;
+    }
+
+    public void setJobTitle(String jobTitle) {
+        this.jobTitle = jobTitle;
     }
 
     public CustomerUnitKey getCustomerUnitKey() {
@@ -181,10 +235,13 @@ public class CustomerContact implements Serializable {
         return "CustomerContact{" +
             "id=" + getId() +
             ", firstName='" + getFirstName() + "'" +
+            ", middleName='" + getMiddleName() + "'" +
             ", lastName='" + getLastName() + "'" +
             ", displayName='" + getDisplayName() + "'" +
             ", email='" + getEmail() + "'" +
-            ", phoneNumber='" + getPhoneNumber() + "'" +
+            ", phone='" + getPhone() + "'" +
+            ", department='" + getDepartment() + "'" +
+            ", jobTitle='" + getJobTitle() + "'" +
             "}";
     }
 }

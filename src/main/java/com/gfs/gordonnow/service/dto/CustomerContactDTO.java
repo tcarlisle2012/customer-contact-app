@@ -18,6 +18,10 @@ public class CustomerContactDTO implements Serializable {
 
     @NotNull(message = "must not be null")
     @Size(min = 1, max = 50)
+    private String middleName;
+
+    @NotNull(message = "must not be null")
+    @Size(min = 1, max = 50)
     private String lastName;
 
     @NotNull(message = "must not be null")
@@ -31,7 +35,15 @@ public class CustomerContactDTO implements Serializable {
 
     @NotNull(message = "must not be null")
     @Size(min = 10, max = 10)
-    private String phoneNumber;
+    private String phone;
+
+    @NotNull(message = "must not be null")
+    @Size(min = 2, max = 120)
+    private String department;
+
+    @NotNull(message = "must not be null")
+    @Size(min = 2, max = 120)
+    private String jobTitle;
 
     private CustomerUnitKeyDTO customerUnitKey;
 
@@ -49,6 +61,14 @@ public class CustomerContactDTO implements Serializable {
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
+    }
+
+    public String getMiddleName() {
+        return middleName;
+    }
+
+    public void setMiddleName(String middleName) {
+        this.middleName = middleName;
     }
 
     public String getLastName() {
@@ -75,12 +95,28 @@ public class CustomerContactDTO implements Serializable {
         this.email = email;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
+    }
+
+    public String getJobTitle() {
+        return jobTitle;
+    }
+
+    public void setJobTitle(String jobTitle) {
+        this.jobTitle = jobTitle;
     }
 
     public CustomerUnitKeyDTO getCustomerUnitKey() {
@@ -118,10 +154,13 @@ public class CustomerContactDTO implements Serializable {
         return "CustomerContactDTO{" +
             "id=" + getId() +
             ", firstName='" + getFirstName() + "'" +
+            ", middleName='" + getMiddleName() + "'" +
             ", lastName='" + getLastName() + "'" +
             ", displayName='" + getDisplayName() + "'" +
             ", email='" + getEmail() + "'" +
-            ", phoneNumber='" + getPhoneNumber() + "'" +
+            ", phone='" + getPhone() + "'" +
+            ", department='" + getDepartment() + "'" +
+            ", jobTitle='" + getJobTitle() + "'" +
             ", customerUnitKey=" + getCustomerUnitKey() +
             "}";
     }
