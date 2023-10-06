@@ -28,6 +28,9 @@ public interface CustomerUnitKeyRepository extends ReactiveCrudRepository<Custom
 
     @Override
     Mono<Void> deleteById(Long id);
+
+    // custom code
+    Flux<CustomerUnitKey> findAllByCustomerNumber(String customerNumber);
 }
 
 interface CustomerUnitKeyRepositoryInternal {

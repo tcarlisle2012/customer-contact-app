@@ -231,4 +231,12 @@ public class CustomerUnitKeyResource {
                 )
             );
     }
+
+    // custom code
+    @GetMapping("/customer-unit-keys/get-by-customer-number/{customerNumber}")
+    public Mono<ResponseEntity<List<CustomerUnitKeyDTO>>> getCustomerContactByCustomerNumber(@PathVariable String customerNumber) {
+        log.debug("REST request to get CustomerContact : {}", customerNumber);
+        Mono<List<CustomerUnitKeyDTO>> customerUnitKey = customerUnitKeyService.findByCustomerNumber(customerNumber).collectList();
+        return ResponseUtil.wrapOrNotFound(customerUnitKey);
+    }
 }

@@ -41,7 +41,7 @@ application {
     prodDatabaseType postgresql
     reactive true
     searchEngine false
-    serverPort 8080
+    serverPort 8070
     serviceDiscoveryType no
     skipClient false
     skipUserManagement false

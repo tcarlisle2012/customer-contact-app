@@ -1,6 +1,6 @@
 {
   "applications": ["customerContactApp"],
-  "changelogDate": "20230927201518",
+  "changelogDate": "20231004195115",
   "dto": "mapstruct",
   "embedded": false,
   "entityTableName": "customer_unit_key",

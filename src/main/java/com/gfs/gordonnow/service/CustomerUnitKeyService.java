@@ -115,4 +115,11 @@ public class CustomerUnitKeyService {
         log.debug("Request to delete CustomerUnitKey : {}", id);
         return customerUnitKeyRepository.deleteById(id);
     }
+
+    // custom code
+    @Transactional(readOnly = true)
+    public Flux<CustomerUnitKeyDTO> findByCustomerNumber(String customerNumber) {
+        log.debug("Request to get CustomerUnitKey : {}", customerNumber);
+        return customerUnitKeyRepository.findAllByCustomerNumber(customerNumber).map(customerUnitKeyMapper::toDto);
+    }
 }
